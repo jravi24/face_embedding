@@ -5,3 +5,4 @@ insightface
 onnxruntime
 scipy
 pillow
+pyinstaller
