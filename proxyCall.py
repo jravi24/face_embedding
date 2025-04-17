@@ -30,6 +30,7 @@ async def proxy(request: APIRequest):
                 "body": response.json() if "application/json" in response.headers.get("content-type", "") else response.text
             }
         except httpx.RequestError as exc:
-            return {"error": f"An error occurred while requesting {exc.request.url!r}."}
+            return {"error": f"An error occurred while requesting {exc.request.url!r}.",
+                   "detail":str(exc)}
         except Exception as e:
             return {"error": str(e)}
