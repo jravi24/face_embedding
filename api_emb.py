@@ -9,10 +9,23 @@ app.json.sort_keys = False
 def compare():
     try:
         data = request.get_json()
+        print("Request JSON:", data)
         transRefNo = data.get('transRefNo')
         image_base64 = data.get('image')
 
+        if not transRefNo or not image_base64:
+            return jsonify({
+                "resultStatus": {
+                    "status": "FAILED",
+                    "errorCode": "1001",
+                    "errorMessage": "Missing transRefNo or image"
+                },
+                "transRefNo": transRefNo or ""
+            }), 400
+
         emb_res = face_emb.get_embedding(transRefNo, image_base64)
+
+        print("Embedding response:", emb_res)
         return jsonify(emb_res), (200 if emb_res['resultStatus']['status'] == 'SUCCESS' else 400)
     
     except Exception as e:
