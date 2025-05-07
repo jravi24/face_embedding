@@ -19,7 +19,7 @@ async def proxy(request: APIRequest):
             response = await client.request(
                 method=request.method.upper(),
                 #url=request.url,
-                url="https://f899-34-82-143-231.ngrok-free.app/generateEmbedding",
+                url="https://11d1-34-67-196-219.ngrok-free.app/generateEmbedding",
                 headers=request.headers,
                 params=request.params,
                 json=request.body  # Automatically sets content-type to application/json
